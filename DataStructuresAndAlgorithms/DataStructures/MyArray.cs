@@ -11,8 +11,15 @@
 
 namespace DataStructuresAndAlgorithms.DataStructures;
 
-internal class Array
+internal class MyArray
 {
+    public void StartArray()
+    {
+        Traverse(getArray());
+        Traverse(InsertAtPosition(getArray(), 1, "grapes"));
+        Traverse(RemoveAtPosition(getArray(), 2));
+    }
+
     public static void CreateOneDimensionalArray()
     {
         int[] intArray1 = new int[5];
@@ -84,5 +91,57 @@ internal class Array
             new int[] { 1, 3, 5, 7, 9 },
             new int[] { 2, 4, 6, 8 }
         };
+    }
+
+    /// <summary>
+    /// Complexity: O(n)
+    /// </summary>
+    public static void Traverse(string[] array)
+    {
+        Console.Write("{");
+        foreach (var item in array)
+        {
+            Console.Write($"{item}, ");
+        }
+        Console.WriteLine("}");
+    }
+
+    /// <summary>
+    /// Complexity: O(n)
+    /// </summary>
+    public static string[] InsertAtPosition(string[] array, int position, string item)
+    {
+        for (var i = array.Length - 1; i > position; i--)
+        {
+            array[i] = array[i - 1];
+        }
+
+        array[position] = item;
+
+        return array;
+    }
+
+    /// <summary>
+    /// Complexity: O(n)
+    /// </summary>
+    public static string[] RemoveAtPosition(string[] array, int position)
+    {
+        for (var i = position; i < array.Length - 1; i++)
+        {
+            array[i] = array[i + 1];
+        }
+
+        return array;
+    }
+
+    private static string[] getArray()
+    {
+        var array = new string[6];
+        array[0] = "apple";
+        array[1] = "mango";
+        array[2] = "peach";
+        array[3] = "orange";
+        array[4] = "banana";
+        return array;
     }
 }
