@@ -1,4 +1,4 @@
 ﻿namespace DataStructuresAndAlgorithms.DataStructures;
-internal class LinkedList
+internal class MyLinkedList
 {
 }
