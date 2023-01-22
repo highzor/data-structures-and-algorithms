@@ -6,6 +6,6 @@ internal class Program
     {
         Console.WriteLine("Hello, DSA!");
         //new MyArray().StartArray();
-        MyDoubleLinkedList<string>.StartMyDoubleLinkedList();
+        new MySinglyLinkedList().Start();
     }
 }
