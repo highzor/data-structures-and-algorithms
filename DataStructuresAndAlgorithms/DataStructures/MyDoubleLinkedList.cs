@@ -213,9 +213,4 @@ public class MyDoubleLinkedList<T> : IEnumerable<T>
     {
         return GetEnumerator();
     }
-
-    bool Compare<T>(T x, T y) where T : class
-    {
-        return x == y;
-    }
 }
