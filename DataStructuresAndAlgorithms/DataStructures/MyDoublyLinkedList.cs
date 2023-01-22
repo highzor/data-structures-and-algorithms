@@ -1,4 +1,4 @@
-﻿//Singly - Linked List
+﻿//Doubly - Linked List
 //                     no tail | with tail
 
 //PushFront(Key)         O(1)
@@ -6,15 +6,15 @@
 //PopFront()             O(1)
 //PushBack(Key)          O(n)      O(1)
 //TopBack()              O(n)      O(1)
-//PopBack()              O(n)
+//PopBack()              O(n)      O(1)
 //Find(Key)              O(n)
 //Erase(Key)             O(n)
 //Empty()                O(1)
-//AddBefore(Node, Key)   O(n)
+//AddBefore(Node, Key)   O(n)      O(1)
 //AddAfter(Node, Key)    O(1)
 
 namespace DataStructuresAndAlgorithms.DataStructures;
-public class MySinglyLinkedList
+public class MyDoublyLinkedList
 {
     Node? Head;
 
@@ -22,6 +22,7 @@ public class MySinglyLinkedList
     {
         public int Data;
         public Node? Next;
+        public Node? Prev;
         public Node(int data)
         {
             Data = data;
@@ -32,6 +33,12 @@ public class MySinglyLinkedList
     {
         var node = new Node(data);
         node.Next = Head;
+
+        if (Head != null)
+        {
+            Head.Prev = node;
+        }
+
         Head = node;
     }
 
@@ -51,6 +58,7 @@ public class MySinglyLinkedList
             lastNode = lastNode.Next;
 
         lastNode.Next = node;
+        node.Prev = lastNode;
     }
 
     public void PushAfter(Node prevNode, int data)
@@ -64,6 +72,10 @@ public class MySinglyLinkedList
         var newNode = new Node(data);
         newNode.Next = prevNode.Next;
         prevNode.Next = newNode;
+        newNode.Prev = prevNode;
+
+        if (newNode.Next != null)
+            newNode.Next.Prev = newNode;
     }
 
     public bool Search(int key)
@@ -107,6 +119,22 @@ public class MySinglyLinkedList
         }
     }
 
+    public void ReverseList()
+    {
+        Node? prev = null, next = null;
+        var current = Head;
+
+        while (current != null)
+        {
+            next = current.Next;
+            current.Next = prev;
+            prev = current;
+            current = next;
+        }
+
+        Head = prev;
+    }
+
     private void printList()
     {
         var node = Head;
@@ -120,7 +148,7 @@ public class MySinglyLinkedList
 
     public void Start()
     {
-        var linkedList = new MySinglyLinkedList();
+        var linkedList = new MyDoublyLinkedList();
         linkedList.PushBack(1);
         linkedList.PushBack(2);
         linkedList.PushBack(3);
@@ -143,6 +171,10 @@ public class MySinglyLinkedList
 
         Console.WriteLine($"Search [2]: {linkedList.Search(2)}");
         Console.WriteLine($"Search [3]: {linkedList.Search(3)}");
+
+        Console.WriteLine($"ReverseList:");
+        linkedList.ReverseList();
+        linkedList.printList();
     }
 }
 
