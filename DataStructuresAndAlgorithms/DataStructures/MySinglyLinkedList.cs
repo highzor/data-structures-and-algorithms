@@ -9,7 +9,7 @@
 //PopBack()              O(n)
 //Find(Key)              O(n)
 //Erase(Key)             O(n)
-//Empty()                O(1)
+//IsEmpty()              O(1)
 //AddBefore(Node, Key)   O(n)
 //AddAfter(Node, Key)    O(1)
 
@@ -35,6 +35,29 @@ public class MySinglyLinkedList
         Head = node;
     }
 
+    public void TopFront()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        Console.WriteLine($"{nameof(TopFront)}: {Head?.Data}");
+    }
+
+    public void PopFront()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        Console.WriteLine($"{nameof(PopFront)}: {Head?.Data}");
+        Head = Head?.Next;
+    }
+
     public void PushBack(int data)
     {
         var node = new Node(data);
@@ -53,7 +76,44 @@ public class MySinglyLinkedList
         lastNode.Next = node;
     }
 
-    public void PushAfter(Node prevNode, int data)
+    public void TopBack()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        var lastNode = Head;
+
+        while (lastNode?.Next != null)
+            lastNode = lastNode.Next;
+
+        Console.WriteLine($"{nameof(TopBack)}: {lastNode?.Data}");
+    }
+
+    public void PopBack()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        var temp = Head;
+        Node? prev = null;
+
+        while (temp?.Next != null)
+        {
+            prev = temp;
+            temp = temp.Next;
+        }
+
+        Console.WriteLine($"{nameof(PopBack)}: {temp?.Data}");
+        prev.Next = null;
+    }
+
+    public void AddAfter(Node prevNode, int data)
     {
         if (prevNode == null)
         {
@@ -66,7 +126,7 @@ public class MySinglyLinkedList
         prevNode.Next = newNode;
     }
 
-    public bool Search(int key)
+    public bool Find(int key)
     {
         var node = Head;
 
@@ -81,7 +141,7 @@ public class MySinglyLinkedList
         return false;
     }
 
-    public void Delete(int key)
+    public void Erase(int key)
     {
         var temp = Head;
         Node? prev = null;
@@ -107,6 +167,11 @@ public class MySinglyLinkedList
         }
     }
 
+    public bool IsEmpty()
+    {
+        return Head is null;
+    }
+
     private void printList()
     {
         var node = Head;
@@ -121,28 +186,41 @@ public class MySinglyLinkedList
     public void Start()
     {
         var linkedList = new MySinglyLinkedList();
+        linkedList.TopFront();
+        linkedList.PopFront();
+        linkedList.TopBack();
+        linkedList.PopBack();
         linkedList.PushBack(1);
         linkedList.PushBack(2);
         linkedList.PushBack(3);
+        linkedList.PushBack(4);
+        linkedList.PushBack(5);
 
-        Console.WriteLine($"PushBack [1, 2, 3]:");
+        Console.WriteLine($"{nameof(PushBack)} [1, 2, 3, 4, 5]:");
         linkedList.printList();
 
-        linkedList.PushFront(4);
-
-        Console.WriteLine($"PushFront [4]:");
+        linkedList.TopFront();
+        linkedList.PopFront();
+        linkedList.printList();
+        linkedList.TopBack();
+        linkedList.PopBack();
         linkedList.printList();
 
-        linkedList.PushAfter(linkedList.Head, 7);
-        Console.WriteLine($"PushAfter head [7]:");
+        linkedList.PushFront(6);
+
+        Console.WriteLine($"{nameof(PushFront)} [6]:");
         linkedList.printList();
 
-        linkedList.Delete(2);
-        Console.WriteLine($"Delete [2]:");
+        linkedList.AddAfter(linkedList.Head, 7);
+        Console.WriteLine($"{nameof(AddAfter)} head [7]:");
         linkedList.printList();
 
-        Console.WriteLine($"Search [2]: {linkedList.Search(2)}");
-        Console.WriteLine($"Search [3]: {linkedList.Search(3)}");
+        linkedList.Erase(2);
+        Console.WriteLine($"{nameof(Erase)} [2]:");
+        linkedList.printList();
+
+        Console.WriteLine($"{nameof(Find)} [2]: {linkedList.Find(2)}");
+        Console.WriteLine($"{nameof(Find)} [3]: {linkedList.Find(3)}");
     }
 }
 

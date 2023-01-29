@@ -6,11 +6,11 @@
 //PopFront()             O(1)
 //PushBack(Key)          O(n)      O(1)
 //TopBack()              O(n)      O(1)
-//PopBack()              O(n)      O(1)
+//PopBack()              O(1)
 //Find(Key)              O(n)
 //Erase(Key)             O(n)
 //Empty()                O(1)
-//AddBefore(Node, Key)   O(n)      O(1)
+//AddBefore(Node, Key)   O(1)
 //AddAfter(Node, Key)    O(1)
 
 namespace DataStructuresAndAlgorithms.DataStructures;
@@ -153,26 +153,26 @@ public class MyDoublyLinkedList
         linkedList.PushBack(2);
         linkedList.PushBack(3);
 
-        Console.WriteLine($"PushBack [1, 2, 3]:");
+        Console.WriteLine($"{nameof(PushBack)} [1, 2, 3]:");
         linkedList.printList();
 
         linkedList.PushFront(4);
 
-        Console.WriteLine($"PushFront [4]:");
+        Console.WriteLine($"{nameof(PushFront)} [4]:");
         linkedList.printList();
 
         linkedList.PushAfter(linkedList.Head, 7);
-        Console.WriteLine($"PushAfter head [7]:");
+        Console.WriteLine($"{nameof(PushAfter)} head [7]:");
         linkedList.printList();
 
         linkedList.Delete(2);
-        Console.WriteLine($"Delete [2]:");
+        Console.WriteLine($"{nameof(Delete)} [2]:");
         linkedList.printList();
 
-        Console.WriteLine($"Search [2]: {linkedList.Search(2)}");
-        Console.WriteLine($"Search [3]: {linkedList.Search(3)}");
+        Console.WriteLine($"{nameof(Search)} [2]: {linkedList.Search(2)}");
+        Console.WriteLine($"{nameof(Search)} [3]: {linkedList.Search(3)}");
 
-        Console.WriteLine($"ReverseList:");
+        Console.WriteLine($"{nameof(ReverseList)}:");
         linkedList.ReverseList();
         linkedList.printList();
     }
