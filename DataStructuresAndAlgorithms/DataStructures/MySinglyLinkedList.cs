@@ -126,6 +126,37 @@ public class MySinglyLinkedList
         prevNode.Next = newNode;
     }
 
+    public void AddBefore(Node nextNode, int data)
+    {
+        if (nextNode == null)
+        {
+            Console.WriteLine("prevNode can't be null");
+            return;
+        }
+
+        if (nextNode == Head)
+        {
+            nextNode.Next = Head;
+            Head = nextNode;
+            return;
+        }
+        else
+        {
+            var temp = Head;
+            Node? prev = null;
+
+            while (temp != nextNode)
+            {
+                prev = temp;
+                temp = temp?.Next;
+            }
+
+            var node = new Node(data);
+            node.Next = nextNode;
+            prev.Next = node;
+        }
+    }
+
     public bool Find(int key)
     {
         var node = Head;
@@ -215,6 +246,10 @@ public class MySinglyLinkedList
         Console.WriteLine($"{nameof(AddAfter)} head [7]:");
         linkedList.printList();
 
+        linkedList.AddBefore(linkedList.Head.Next, 10);
+        Console.WriteLine($"{nameof(AddBefore)} head.next [10]:");
+        linkedList.printList();
+
         linkedList.Erase(2);
         Console.WriteLine($"{nameof(Erase)} [2]:");
         linkedList.printList();
@@ -223,4 +258,3 @@ public class MySinglyLinkedList
         Console.WriteLine($"{nameof(Find)} [3]: {linkedList.Find(3)}");
     }
 }
-
