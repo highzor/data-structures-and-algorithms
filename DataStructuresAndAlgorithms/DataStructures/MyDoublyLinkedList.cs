@@ -6,7 +6,7 @@
 //PopFront()             O(1)
 //PushBack(Key)          O(n)      O(1)
 //TopBack()              O(n)      O(1)
-//PopBack()              O(1)
+//PopBack()              O(n)      O(1)
 //Find(Key)              O(n)
 //Erase(Key)             O(n)
 //Empty()                O(1)
@@ -14,6 +14,7 @@
 //AddAfter(Node, Key)    O(1)
 
 namespace DataStructuresAndAlgorithms.DataStructures;
+
 public class MyDoublyLinkedList
 {
     Node? Head;
@@ -42,10 +43,35 @@ public class MyDoublyLinkedList
         Head = node;
     }
 
+    public void TopFront()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        Console.WriteLine($"{nameof(TopFront)}: {Head?.Data}");
+    }
+
+    public void PopFront()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        Console.WriteLine($"{nameof(PopFront)}: {Head?.Data}");
+        Head = Head?.Next;
+        if (Head != null)
+            Head.Prev = null;
+    }
+
     public void PushBack(int data)
     {
         var node = new Node(data);
-        
+
         if (Head == null)
         {
             Head = node;
@@ -54,31 +80,90 @@ public class MyDoublyLinkedList
 
         var lastNode = Head;
 
-        while (lastNode.Next != null) 
+        while (lastNode.Next != null)
             lastNode = lastNode.Next;
 
         lastNode.Next = node;
         node.Prev = lastNode;
     }
 
-    public void PushAfter(Node prevNode, int data)
+    public void TopBack()
     {
-        if (prevNode == null)
+        if (IsEmpty())
         {
-            Console.WriteLine("prevNode can't be null");
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        var lastNode = Head;
+
+        while (lastNode?.Next != null)
+            lastNode = lastNode.Next;
+
+        Console.WriteLine($"{nameof(TopBack)}: {lastNode?.Data}");
+    }
+
+    public void PopBack()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("LinkedList is empty.");
+            return;
+        }
+
+        var lastNode = Head;
+
+        while (lastNode?.Next != null)
+            lastNode = lastNode.Next;
+
+        Console.WriteLine($"{nameof(PopBack)}: {lastNode?.Data}");
+        lastNode.Prev.Next = null;
+    }
+
+    public void AddAfter(Node givenNode, int data)
+    {
+        if (givenNode == null)
+        {
+            Console.WriteLine("givenNode can't be null");
             return;
         }
 
         var newNode = new Node(data);
-        newNode.Next = prevNode.Next;
-        prevNode.Next = newNode;
-        newNode.Prev = prevNode;
-
+        newNode.Next = givenNode.Next;
+        givenNode.Next = newNode;
+        newNode.Prev = givenNode;
         if (newNode.Next != null)
             newNode.Next.Prev = newNode;
+
     }
 
-    public bool Search(int key)
+    public void AddBefore(Node givenNode, int data)
+    {
+        if (givenNode == null)
+        {
+            Console.WriteLine("givenNode can't be null");
+            return;
+        }
+
+        var node = new Node(data);
+
+        if (givenNode == Head)
+        {
+            node.Next = Head;
+            Head.Prev = node;
+            Head = node;
+            return;
+        }
+        else
+        {
+            node.Prev = givenNode.Prev;
+            givenNode.Prev = node;
+            node.Next = givenNode;
+            node.Prev.Next = node;
+        }
+    }
+
+    public bool Find(int key)
     {
         var node = Head;
 
@@ -93,46 +178,51 @@ public class MyDoublyLinkedList
         return false;
     }
 
-    public void Delete(int key)
+    public void Erase(int key)
     {
         var temp = Head;
-        Node? prev = null;
 
         if (temp != null && temp.Data == key)
         {
             Head = temp.Next;
+            if (Head != null)
+                Head.Prev = null;
             return;
         }
 
         while (temp != null && temp.Data != key)
-        {
-            prev = temp;
             temp = temp.Next;
-        }
 
         if (temp == null)
             return;
 
-        if (prev != null)
+        if (temp.Prev != null)
         {
-            prev.Next = temp.Next;
+            temp.Prev.Next = temp.Next;
+            if (temp.Next != null)
+                temp.Next.Prev = temp.Prev;
         }
     }
 
-    public void ReverseList()
+    //public void ReverseList()
+    //{
+    //    Node? prev = null, next = null;
+    //    var current = Head;
+
+    //    while (current != null)
+    //    {
+    //        next = current.Next;
+    //        current.Next = prev;
+    //        prev = current;
+    //        current = next;
+    //    }
+
+    //    Head = prev;
+    //}
+
+    public bool IsEmpty()
     {
-        Node? prev = null, next = null;
-        var current = Head;
-
-        while (current != null)
-        {
-            next = current.Next;
-            current.Next = prev;
-            prev = current;
-            current = next;
-        }
-
-        Head = prev;
+        return Head is null;
     }
 
     private void printList()
@@ -149,31 +239,66 @@ public class MyDoublyLinkedList
     public void Start()
     {
         var linkedList = new MyDoublyLinkedList();
+        linkedList.TopFront();
+        linkedList.PopFront();
+        linkedList.TopBack();
+        linkedList.PopBack();
         linkedList.PushBack(1);
         linkedList.PushBack(2);
         linkedList.PushBack(3);
+        linkedList.PushBack(4);
+        linkedList.PushBack(5);
 
-        Console.WriteLine($"{nameof(PushBack)} [1, 2, 3]:");
+        Console.WriteLine($"{nameof(PushBack)} [1, 2, 3, 4, 5]:");
         linkedList.printList();
 
-        linkedList.PushFront(4);
-
-        Console.WriteLine($"{nameof(PushFront)} [4]:");
+        linkedList.TopFront();
+        linkedList.PopFront();
+        linkedList.TopFront();
+        linkedList.printList();
+        linkedList.TopBack();
+        linkedList.PopBack();
+        linkedList.TopBack();
         linkedList.printList();
 
-        linkedList.PushAfter(linkedList.Head, 7);
-        Console.WriteLine($"{nameof(PushAfter)} head [7]:");
+        linkedList.PushFront(6);
+        Console.WriteLine($"{nameof(PushFront)} [6]:");
         linkedList.printList();
 
-        linkedList.Delete(2);
-        Console.WriteLine($"{nameof(Delete)} [2]:");
+        linkedList.Erase(6);
+        Console.WriteLine($"{nameof(Erase)} [6]:");
         linkedList.printList();
 
-        Console.WriteLine($"{nameof(Search)} [2]: {linkedList.Search(2)}");
-        Console.WriteLine($"{nameof(Search)} [3]: {linkedList.Search(3)}");
+        linkedList.PushFront(6);
+        Console.WriteLine($"{nameof(PushFront)} [6]:");
+        linkedList.printList();
 
-        Console.WriteLine($"{nameof(ReverseList)}:");
-        linkedList.ReverseList();
+        linkedList.AddAfter(linkedList.Head, 7);
+        Console.WriteLine($"{nameof(AddAfter)} head [7]:");
+        linkedList.printList();
+        linkedList.AddAfter(linkedList.Head, 12);
+        Console.WriteLine($"{nameof(AddAfter)} head [12]:");
+        linkedList.printList();
+
+        linkedList.AddBefore(linkedList.Head.Next, 10);
+        Console.WriteLine($"{nameof(AddBefore)} head.next [10]:");
+        linkedList.printList();
+        linkedList.AddBefore(linkedList.Head, 15);
+        Console.WriteLine($"{nameof(AddBefore)} head [15]:");
+        linkedList.printList();
+
+        linkedList.Erase(2);
+        Console.WriteLine($"{nameof(Erase)} [2]:");
+        linkedList.printList();
+        linkedList.Erase(4);
+        Console.WriteLine($"{nameof(Erase)} [4]:");
+        linkedList.printList();
+
+        Console.WriteLine($"{nameof(Find)} [2]: {linkedList.Find(2)}");
+        Console.WriteLine($"{nameof(Find)} [3]: {linkedList.Find(3)}");
+
+        //Console.WriteLine($"{nameof(ReverseList)}:");
+        //linkedList.ReverseList();
         linkedList.printList();
     }
 }
