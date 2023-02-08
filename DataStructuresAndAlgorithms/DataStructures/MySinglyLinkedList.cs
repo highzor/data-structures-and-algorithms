@@ -12,6 +12,7 @@
 //IsEmpty()              O(1)
 //AddBefore(Node, Key)   O(n)
 //AddAfter(Node, Key)    O(1)
+//ReverseList()          O(n)
 
 namespace DataStructuresAndAlgorithms.DataStructures;
 

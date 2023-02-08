@@ -12,6 +12,7 @@
 //Empty()                O(1)
 //AddBefore(Node, Key)   O(1)
 //AddAfter(Node, Key)    O(1)
+//ReverseList()          O(n)
 
 namespace DataStructuresAndAlgorithms.DataStructures;
 
@@ -204,21 +205,23 @@ public class MyDoublyLinkedList
         }
     }
 
-    //public void ReverseList()
-    //{
-    //    Node? prev = null, next = null;
-    //    var current = Head;
+    public void ReverseList()
+    {
+        Node? temp = null;
+        var current = Head;
 
-    //    while (current != null)
-    //    {
-    //        next = current.Next;
-    //        current.Next = prev;
-    //        prev = current;
-    //        current = next;
-    //    }
+        while (current != null)
+        {
+            temp = current.Prev;
+            current.Prev = current.Next;
+            current.Next = temp;
+            current = current.Prev;
+        }
 
-    //    Head = prev;
-    //}
+        if (temp != null)
+            Head = temp.Prev;
+        
+    }
 
     public bool IsEmpty()
     {
@@ -297,8 +300,8 @@ public class MyDoublyLinkedList
         Console.WriteLine($"{nameof(Find)} [2]: {linkedList.Find(2)}");
         Console.WriteLine($"{nameof(Find)} [3]: {linkedList.Find(3)}");
 
-        //Console.WriteLine($"{nameof(ReverseList)}:");
-        //linkedList.ReverseList();
+        Console.WriteLine($"{nameof(ReverseList)}:");
+        linkedList.ReverseList();
         linkedList.printList();
     }
 }
