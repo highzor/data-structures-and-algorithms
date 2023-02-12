@@ -22,7 +22,7 @@ public class MyStackAsLinkedList
     {
         var newNode = new StackNode(data);
 
-        if (IsEmpty())
+        if (isEmpty())
         {
             Root = newNode;
             Console.WriteLine($"{nameof(Push)}: {Root.Data} is pushed to the stack");
@@ -38,9 +38,9 @@ public class MyStackAsLinkedList
 
     public void Top()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
-            Console.WriteLine("Stack is empty");
+            Console.WriteLine($"{nameof(Top)}: Stack is empty");
             return;
         }
 
@@ -49,7 +49,7 @@ public class MyStackAsLinkedList
 
     public void Pop()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("Stack is empty");
             return;
@@ -59,7 +59,7 @@ public class MyStackAsLinkedList
         Root = Root?.Next;
     }
 
-    public bool IsEmpty()
+    private bool isEmpty()
     {
         return Root is null;
     }
