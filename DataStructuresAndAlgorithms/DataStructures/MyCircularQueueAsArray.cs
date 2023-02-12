@@ -1,4 +1,9 @@
-﻿namespace DataStructuresAndAlgorithms.DataStructures;
+﻿//Enqueue()         O(1)
+//Dequeue()         O(1)
+//IsFull()          O(1)
+//IsEmpty()         O(1)
+
+namespace DataStructuresAndAlgorithms.DataStructures;
 
 public class MyCircularQueueAsArray
 {
