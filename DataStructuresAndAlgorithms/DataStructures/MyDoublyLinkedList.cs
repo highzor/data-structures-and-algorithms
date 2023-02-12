@@ -46,7 +46,7 @@ public class MyDoublyLinkedList
 
     public void TopFront()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -57,7 +57,7 @@ public class MyDoublyLinkedList
 
     public void PopFront()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -90,7 +90,7 @@ public class MyDoublyLinkedList
 
     public void TopBack()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -106,7 +106,7 @@ public class MyDoublyLinkedList
 
     public void PopBack()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -223,7 +223,7 @@ public class MyDoublyLinkedList
         
     }
 
-    public bool IsEmpty()
+    private bool isEmpty()
     {
         return Head is null;
     }

@@ -9,6 +9,8 @@ internal class Program
         //new MySinglyLinkedList().Start();
         //new MyDoublyLinkedList().Start();
         //new MyStackAsArray().Start();
-        new MyStackAsLinkedList().Start();
+        //new MyStackAsLinkedList().Start();
+        //new MyQueueAsArray().Start();
+        new MyCircularQueueAsArray().Start();
     }
 }

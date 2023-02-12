@@ -21,9 +21,9 @@ public class MyStackAsArray
 
     public void Push(int data)
     {
-        if (IsFull())
+        if (isFull())
         {
-            Console.WriteLine("Stack overflow");
+            Console.WriteLine($"{nameof(Push)}: Stack overflow");
             return;
         }
 
@@ -33,7 +33,7 @@ public class MyStackAsArray
 
     public void Top()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("Stack is empty");
             return;
@@ -44,7 +44,7 @@ public class MyStackAsArray
 
     public void Pop()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("Stack is empty");
             return;
@@ -53,21 +53,21 @@ public class MyStackAsArray
         Console.WriteLine($"{nameof(Pop)}: {stack[top--]} is popped");
     }
 
-    public bool IsEmpty()
+    private bool isEmpty()
     {
         return top < 1;
     }
 
-    public bool IsFull()
+    private bool isFull()
     {
         return top == max - 1;
     }
 
     private void printStack()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
-            Console.WriteLine("Stack is empty");
+            Console.WriteLine($"{nameof(printStack)}: Stack is empty");
             return;
         }
 

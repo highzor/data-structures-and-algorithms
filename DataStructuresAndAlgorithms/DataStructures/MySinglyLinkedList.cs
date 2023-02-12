@@ -39,7 +39,7 @@ public class MySinglyLinkedList
 
     public void TopFront()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -50,7 +50,7 @@ public class MySinglyLinkedList
 
     public void PopFront()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -80,7 +80,7 @@ public class MySinglyLinkedList
 
     public void TopBack()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -96,7 +96,7 @@ public class MySinglyLinkedList
 
     public void PopBack()
     {
-        if (IsEmpty())
+        if (isEmpty())
         {
             Console.WriteLine("LinkedList is empty.");
             return;
@@ -217,7 +217,7 @@ public class MySinglyLinkedList
         Head = prev;
     }
 
-    public bool IsEmpty()
+    private bool isEmpty()
     {
         return Head is null;
     }
