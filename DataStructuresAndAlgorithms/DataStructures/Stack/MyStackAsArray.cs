@@ -2,7 +2,7 @@
 //pop()       O(1)
 //top()       O(1)
 
-namespace DataStructuresAndAlgorithms.DataStructures;
+namespace DataStructuresAndAlgorithms.DataStructures.Stack;
 
 public class MyStackAsArray
 {
@@ -11,13 +11,13 @@ public class MyStackAsArray
     private int max;
 
     public MyStackAsArray(int size)
-    { 
+    {
         stack = new int[size];
         top = -1;
         max = size;
     }
 
-    public MyStackAsArray() {}
+    public MyStackAsArray() { }
 
     public void Push(int data)
     {
