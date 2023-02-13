@@ -3,17 +3,16 @@
 //IsFull()          O(1)
 //IsEmpty()         O(1)
 
-namespace DataStructuresAndAlgorithms.DataStructures;
+namespace DataStructuresAndAlgorithms.DataStructures.Queue;
 
-public class MyCircularQueueAsArray
+public class MyQueueAsArray
 {
     private int[] queue;
     private int front;
     private int rear;
     private int max;
-    private int count;
 
-    public MyCircularQueueAsArray(int size)
+    public MyQueueAsArray(int size)
     {
         queue = new int[size];
         front = 0;
@@ -21,21 +20,18 @@ public class MyCircularQueueAsArray
         max = size;
     }
 
-    public MyCircularQueueAsArray() {}
+    public MyQueueAsArray() { }
 
     public void Enqueue(int data)
     {
         if (isFull())
         {
-            Console.WriteLine($"{nameof(Enqueue)}: Queue overflow");
+            Console.WriteLine($"{nameof(Enqueue)}: Queue is overflow");
             return;
         }
 
-        rear = (rear + 1) % max;
-        queue[rear] = data;
-        count++;
-
-        Console.WriteLine($"{nameof(Enqueue)}: {queue[rear]} is enqueued");
+        Console.WriteLine($"{nameof(Enqueue)}: {data} is enqueued");
+        queue[++rear] = data;
     }
 
     public void Dequeue()
@@ -46,9 +42,7 @@ public class MyCircularQueueAsArray
             return;
         }
 
-        Console.WriteLine($"{nameof(Dequeue)}: {queue[front]} is dequeued");
-        front = (front + 1) % max;
-        count--;
+        Console.WriteLine($"{nameof(Dequeue)}: {queue[front++]} is dequeued");
     }
 
     private void printQueue()
@@ -59,32 +53,26 @@ public class MyCircularQueueAsArray
             return;
         }
 
-        var i = front;
-        var j = 0;
-
-        for (; j < count;)
+        for (var i = front; i <= rear; i++)
         {
             Console.Write($"{queue[i]} <- ");
-            i = (i + 1) % max;
-            j++;
         }
-
         Console.WriteLine();
     }
 
     private bool isFull()
     {
-        return count == max;
+        return rear == max - 1;
     }
 
     private bool isEmpty()
     {
-        return count == 0;
+        return front == rear + 1;
     }
 
     public void Start()
     {
-        var queue = new MyCircularQueueAsArray(5);
+        var queue = new MyQueueAsArray(5);
         queue.printQueue();
         queue.Dequeue();
         queue.Enqueue(1);
@@ -97,15 +85,6 @@ public class MyCircularQueueAsArray
         queue.Dequeue();
         queue.printQueue();
         queue.Enqueue(6);
-        queue.printQueue();
-        queue.Enqueue(7);
-        queue.printQueue();
-        queue.Enqueue(8);
-        queue.printQueue();
-        queue.Enqueue(9); //error
-        queue.printQueue();
-        queue.Dequeue();
-        queue.Enqueue(9); //success
         queue.printQueue();
     }
 }

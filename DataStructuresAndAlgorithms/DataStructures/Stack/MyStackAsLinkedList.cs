@@ -2,12 +2,12 @@
 //pop()       O(1)
 //top()       O(1)
 
-namespace DataStructuresAndAlgorithms.DataStructures;
+namespace DataStructuresAndAlgorithms.DataStructures.Stack;
 
 public class MyStackAsLinkedList
 {
     StackNode? Root;
-    public class StackNode 
+    public class StackNode
     {
         public int Data;
         public StackNode? Next;

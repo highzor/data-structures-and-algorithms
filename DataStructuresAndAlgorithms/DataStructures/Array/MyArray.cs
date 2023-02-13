@@ -9,7 +9,7 @@
 //End         O(1) O(1)
 //Middle      O(n) O(n)
 
-namespace DataStructuresAndAlgorithms.DataStructures;
+namespace DataStructuresAndAlgorithms.DataStructures.Array;
 
 internal class MyArray
 {

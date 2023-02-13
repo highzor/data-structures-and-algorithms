@@ -14,7 +14,7 @@
 //AddAfter(Node, Key)    O(1)
 //ReverseList()          O(n)
 
-namespace DataStructuresAndAlgorithms.DataStructures;
+namespace DataStructuresAndAlgorithms.DataStructures.LinkedList;
 
 public class MyDoublyLinkedList
 {
@@ -220,7 +220,7 @@ public class MyDoublyLinkedList
 
         if (temp != null)
             Head = temp.Prev;
-        
+
     }
 
     private bool isEmpty()
