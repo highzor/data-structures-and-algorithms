@@ -1,4 +1,5 @@
 ﻿using DataStructuresAndAlgorithms.DataStructures.Array;
+using DataStructuresAndAlgorithms.DataStructures.HashTable;
 using DataStructuresAndAlgorithms.DataStructures.LinkedList;
 using DataStructuresAndAlgorithms.DataStructures.Queue;
 using DataStructuresAndAlgorithms.DataStructures.Stack;
@@ -16,5 +17,6 @@ internal class Program
         new MyQueueAsArray().Start();
         new MyCircularQueueAsArray().Start();
         new MyQueueAsLinkedList().Start();
+        new HashTableSepChain().Start();
     }
 }
