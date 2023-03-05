@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace DataStructuresAndAlgorithms.DataStructures.HashTable;
+﻿namespace DataStructuresAndAlgorithms.DataStructures.HashTable;
 
 public class HashTableSepChain
 {
@@ -51,10 +49,10 @@ public class HashTableSepChain
         if (loadFactor?.Length > 0)
         {
             LoadFactor = loadFactor[0];
-            Threshold = (int)LoadFactor * size;
+            Threshold = (int)(LoadFactor * size);
         }
         else
-            Threshold = (int)DEFAULT_LOADFACTOR * size;
+            Threshold = (int)(DEFAULT_LOADFACTOR * size);
     }
 
     public HashTableSepChain() {}
