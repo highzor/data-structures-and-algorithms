@@ -55,7 +55,7 @@ public class HashTableSepChain
             Threshold = (int)(DEFAULT_LOADFACTOR * size);
     }
 
-    public HashTableSepChain() {}
+    public HashTableSepChain() { }
 
     public void Add(string key, string value)
     {
@@ -92,6 +92,7 @@ public class HashTableSepChain
             }
         }
 
+        Console.WriteLine($"{nameof(Find)}: key: '{key}' isn't found");
         return null;
     }
 
@@ -115,27 +116,29 @@ public class HashTableSepChain
     }
     private void resizeTable()
     {
+        printTable();
         Size *= 2;
-        Threshold = (int)LoadFactor * Size;
+        Threshold = (int)(LoadFactor * Size);
         Console.WriteLine($"{nameof(resizeTable)}: DOUBLED SIZE = {Size}");
         IList<Entry>[] newTable = new List<Entry>[Size];
 
         for (var i = 0; i < HashTable.Length; i++)
         {
-            if (HashTable[i] != null)
+            if (HashTable[i] is null)
+                continue;
+
+            foreach (var entry in HashTable[i])
             {
-                foreach (var entry in HashTable[i])
-                {
-                    var newIndex = compressionFunction(entry.HashCode);
-                    var bucket = newTable[newIndex];
+                var newIndex = compressionFunction(entry.HashCode);
+                var bucket = newTable[newIndex];
 
-                    if (bucket == null)
-                        bucket = new List<Entry>();
+                if (bucket is null)
+                    bucket = new List<Entry>();
 
-                    bucket.Add(entry);
-                    newTable[newIndex] = bucket;
-                }
+                bucket.Add(entry);
+                newTable[newIndex] = bucket;
             }
+
         }
 
         HashTable = newTable;
@@ -143,9 +146,23 @@ public class HashTableSepChain
 
     private void printTable()
     {
+        Console.WriteLine();
+        Console.WriteLine($"{nameof(printTable)}: ");
+
         for (int i = 0; i <= HashTable.Length - 1; i++)
         {
-            Console.WriteLine($"Index [{i}] => {HashTable[i]?.Count()}");
+            if (HashTable[i] is null)
+            {
+                Console.WriteLine($"Index [{i}] => empty");
+                continue;
+            }
+
+            Console.WriteLine($"Index [{i}] => ");
+
+            foreach (var entry in HashTable[i])
+            {
+                Console.WriteLine(entry.ToString());
+            }
         }
     }
 
@@ -172,6 +189,8 @@ public class HashTableSepChain
         hashTable.Find("xyz");
 
         hashTable.Remove("mno");
+
+        hashTable.Find("mno");
 
         hashTable.printTable();
     }
